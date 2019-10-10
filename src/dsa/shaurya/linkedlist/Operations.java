@@ -3,17 +3,77 @@ package dsa.shaurya.linkedlist;
 public class Operations {
 	public static void main(String[] args) {
 		Node head = new Node(1);
-		head.next = new Node(2);
-		head.next.next = new Node(3);
-		head.next.next.next=null;
+		head.next = null;
+//		head.next = new Node(2);
+//		head.next.next = new Node(3);
+//		head.next.next.next=null;
 //		head = insertLast(head, 4);
-		head = insertAt(head,4,7);
-		head = removeFromEnd(head);
-		head = removeFromEnd(head);
+//		head = insertLast(head, 5);
+//		head = insertLast(head, 6);
+//		head = insertLast(head, 7);
+//		head = reverseSelf(head);
+		head = reverseBetween(head,1,1);
 		print(head);
-	
 	}
 	
+	static public Node reverseBetween(Node A, int B, int C) {
+        
+		Node head1 = A,curr=A;
+		Node prev = null;
+		int count=1;
+		while(count<B && curr.next!=null) {
+			prev = curr;
+			curr = curr.next;
+			count++;
+		}
+		if(prev!=null)
+			prev.next=null;
+		head1=curr;
+		while(count<=C && curr.next!=null) {
+			prev = curr;
+			curr=curr.next;
+			count++;
+		}
+		
+		if(prev!=null)
+			prev.next=null;
+		Node head2 = curr;
+		head1 = reverseSelf(head1);
+		Node p = A;
+		while(p.next!=null) {
+			p = p.next;
+		}
+		 
+		p.next = head1;
+		
+		while(p.next!=null) {
+			p=p.next;
+		}
+		p.next = head2;
+        return A;
+    }
+	
+	public static Node reverseSelf(Node head) {
+		Node temp=null,q=null;
+		while(head!=null) {
+			temp = head.next;//c
+			head.next = q;
+			q = head;
+			head = temp;//c
+		}
+		return q;
+	}
+	
+	public static Node reverse(Node head) {
+		Node temp =null,newNode;
+		while(head!=null) {
+			newNode = head.next;
+			head.next=temp;
+			temp = head;
+			head = newNode;
+		}
+		return temp;
+	}
 	public static Node removeFromEnd(Node head) {
 		Node p = head,q = null;
 		if(head==null) {

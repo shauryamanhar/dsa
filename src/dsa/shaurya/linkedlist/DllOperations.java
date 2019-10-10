@@ -8,13 +8,23 @@ public class DllOperations {
 		head = insert(head,3,3);
 		head = insert(head,4,4);
 		head = insert(head,5,5);
+		
+		head = reverse(head);
 		print(head);
-		head = delete(head,5);
-		head = delete(head,4);
-		head = delete(head,3);
-		head = delete(head,2);
-		head = delete(head,1);
-		print(head);
+	}
+	
+	
+	public static DLLNode reverse(DLLNode head) {
+		DLLNode prev = null,temp = null,curr = head;
+		while(curr!=null) {
+			temp = curr.next;
+			curr.next = prev;
+			curr.prev = temp;
+			prev = curr;
+			curr = temp;
+		}
+		return prev;
+				
 	}
 	
 	public static DLLNode delete(DLLNode head,int position) {
