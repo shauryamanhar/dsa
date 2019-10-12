@@ -20,20 +20,19 @@ public class Codechef
 	}//main
 	
 	public static void solve(int n,int []arr){
-		int maxStar = Integer.MIN_VALUE,count=0;
-		for(int i=0;i<n;i++) {
-			count=0;
-			for(int j=i-1;j>=0;j--) {
-				if(arr[j]%arr[i]==0) {
+		int gMin = arr[0];
+		int count=1;
+		for(int i=0;i<arr.length;i++) {
+			for(int j=i,k=i-5;k>=0 && j>=k;j--) {
+				if(gMin>=arr[j]) {
 					count++;
+					gMin=arr[j];
+					System.out.println(gMin);
 				}
-			}//for
-			
-			if(maxStar<count) {
-				maxStar = count;
 			}
-			
+			System.out.println();
 		}
-		System.out.println(maxStar);
+		System.out.println(count);
+		
 	}//solve
 }//codechef
