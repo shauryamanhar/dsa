@@ -90,7 +90,7 @@ public class PostfixEvaluation {
 		return ans.toString();
 	}
 	public static void main(String[] args) {
-		String exp = "(1+2)*(1+2)";
+		String exp = "(1+2)*(1+2)/2";
 		System.out.println(evaluatePostfix(exp));
 
 	}

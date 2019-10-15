@@ -1,38 +1,63 @@
 package dsa.shaurya;
-
 import java.util.*;
-
-/* Name of the class has to be "Main" only if the class is public. */
 public class Codechef
 {
 	public static void main (String[] args) throws java.lang.Exception
 	{
-		Scanner scan = new Scanner(System.in);
-		int t = scan.nextInt();
-		while(t-->0){
-			int n = scan.nextInt();
-			int arr[] = new int[n];
-			for(int i=0;i<n;i++) {
-				arr[i] = scan.nextInt();
+		int t;
+		Scanner sc = new Scanner(System.in);
+		t = sc.nextInt();
+		for(int k=0; k<t; k++)
+		{
+			int n= sc.nextInt();
+			int count=0;
+			int p[]= new int[n];
+			for(int i=0; i<n; i++)
+			{
+				p[i]= sc.nextInt();
 			}
-			solve(n,arr);
-		}//while
-	}//main
-	
-	public static void solve(int n,int []arr){
-		int gMin = arr[0];
-		int count=1;
-		for(int i=0;i<arr.length;i++) {
-			for(int j=i,k=i-5;k>=0 && j>=k;j--) {
-				if(gMin>=arr[j]) {
+			for(int i=0; i<n; i++)
+			{
+				if(i==0)
 					count++;
-					gMin=arr[j];
-					System.out.println(gMin);
+				else if(i==1)
+				{
+					if(p[i]<p[i-1])
+					{
+						count++;
+					}
+				}
+				else if(i==2)
+				{
+					if(p[i]<p[i-1] && p[i]<p[i-2])
+					{
+						count++;
+					}
+				}
+				else if(i==3)
+				{
+					if(p[i]<p[i-1] && p[i]<p[i-2] && p[i]<p[i-3])
+					{
+						count++;
+					}
+				}
+				else if(i==4)
+				{
+					if(p[i]<p[i-1] && p[i]<p[i-2] && p[i]<p[i-3] && p[i]<p[i-4])
+					{
+						count++;
+					}
+				}
+				else
+				{
+					if(p[i]<p[i-1] && p[i]<p[i-2] && p[i]<p[i-3] && p[i]<p[i
+					                                                       -4] && p[i]<p[i-5])
+					{
+						count++;
+					}
 				}
 			}
-			System.out.println();
+			System.out.println(count);
 		}
-		System.out.println(count);
-		
-	}//solve
-}//codechef
+	}
+}
