@@ -8,47 +8,31 @@ public class Main {
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		int n=scan.nextInt();
-		int m=scan.nextInt();
 		int x=scan.nextInt();
-		int a[] = new int[n];
-		int b[] = new int[m];
+		
+		long a[] = new long[n];
+		
 		for(int i=0;i<n;i++) {
-			a[i] =scan.nextInt();
+			a[i] =scan.nextLong();
 		}
-		for(int i=0;i<m;i++) {
-			b[i] =scan.nextInt();
-		}
-		System.out.println(twoStacks(x, a, b));
+		
+		System.out.println(findMax(a,n, x));
 
 	}
-	static int twoStacks(int x, int[] a, int[] b) {
-		Stack<Integer> astack = new Stack<Integer>();
-        Stack<Integer> bstack = new Stack<Integer>();
-        for(int i=a.length-1;i>=0;i--){
-            astack.push(a[i]);
+	public static long findMax(long a[],int n,int k){
+		int top = 0;
+        long stacksum = 0;
+        for(int i=0;i<k;i++){
+            stacksum+=a[top++];
         }
-        for(int i=b.length-1;i>=0;i--){
-            bstack.push(b[i]);
+        long gmax = stacksum;
+        int r=1;
+        while(r<=k-1){
+            stacksum=stacksum-a[--top];
+            stacksum=stacksum+a[n-r];
+            gmax = Math.max(stacksum,gmax);
+            r++;
         }
-
-        int count=0;
-        int sum = 0;
-        while(sum<=x){
-            if(!astack.isEmpty() && !bstack.isEmpty()){
-                sum = sum+astack.pop()+bstack.pop();;
-                count=count+2;    
-            }
-
-            if(!astack.isEmpty()){
-                sum = sum+astack.pop();;
-                count++;    
-            }
-            if(!bstack.isEmpty()){
-                sum = sum+bstack.pop();
-                count++;
-            }   
-        }
-        return count;
+        return gmax;
     }
-
 }
