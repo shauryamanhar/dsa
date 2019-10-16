@@ -1,5 +1,7 @@
 package dsa.shaurya.stack;
 
+import java.util.Stack;
+
 public class MinStack {
 	LinkedListStack<Integer> elementStack = 
 			new LinkedListStack<Integer>();
@@ -30,21 +32,64 @@ public class MinStack {
 		return minStack.peek()==null?-1:minStack.peek();
 	}
 	
+	public int peek() {
+		return getMin();
+	}
+	
 	public static void main(String[] args) {
-		MinStack ms = new MinStack();
-		ms.push(2);
-		ms.push(5);
-		ms.push(8);
-		ms.push(4);
-		ms.push(2);
-		ms.push(1);
-		System.out.println("pop "+ms.pop());
-		System.out.println("pop "+ms.pop());
-		System.out.println("pop "+ms.pop());
-		System.out.println("pop "+ms.pop());
-		System.out.println("pop "+ms.pop());
+		MinStackOpt ms = new MinStackOpt();
+		int a[] = {3,7,12,8,4,5,2};
+		for(int i=0;i<a.length;i++) {
+			ms.push(a[i]);
+		}
 		System.out.println(ms.getMin());
-
 	}
 
+}
+
+class MinStackOpt{
+	Stack<Integer> stack; 
+	Integer minElement;
+	MinStackOpt() { stack = new Stack<Integer>(); }
+	
+	public Integer getMin() {
+		if(!stack.isEmpty()) {
+			return minElement;
+		}
+		return null;
+	}
+	
+	public void push(int x) {
+		if(stack.isEmpty()) {
+			stack.push(x);
+			minElement=x;
+			return;
+		}
+		if(x>=minElement) {
+			//always insert greater number than min element
+			stack.push(x);
+		}else {
+			//smaller number set to min but stack hold diff number
+			minElement=x;
+			stack.push(2*x-minElement);
+		}
+		
+	}
+	
+	public Integer pop() {
+		if(stack.isEmpty()) {
+			return null;
+		}
+		
+		int t = stack.pop();
+		if(t<minElement) {
+			int temp = minElement;
+			minElement =2*minElement - t;
+			return temp;
+		}else {
+			return t;
+		}
+	}
+	
+	
 }
