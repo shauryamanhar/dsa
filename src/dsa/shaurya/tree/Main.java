@@ -10,8 +10,10 @@ public class Main {
 		t.insert(root, 4);
 		t.insert(root, 5);
 		t.insert(root, 6);
-		t.insert(root, 7);
-		t.postorder(root);
+		
+//		t.preorderItr(root);
+		System.out.println(t.sizeItr(root));
+		
 	}
 
 }
