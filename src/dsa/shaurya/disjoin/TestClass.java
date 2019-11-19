@@ -6,10 +6,10 @@ public class TestClass {
     int parent[] = null;
     int size[] = null;
     
-    TestClass(int n){
-        parent = new int[n+1];
+    public TestClass(int n){
+        this.parent = new int[n+1];
         size = new int[n+1];
-        for(int i=0;i<n;i++){
+        for(int i=0;i<=n;i++){
             parent[i]=i;
             size[i]=1;
         }
@@ -28,18 +28,21 @@ public class TestClass {
         if(ra==rb){
             return false;
         }
-        parent[ra]=parent[rb];
-        size[ra]+=size[rb];
-        size[rb]=-1;
+        parent[ra]=rb;
+        size[rb]+=size[ra];
+        size[ra]=-1;
         return true;
     }//union
     
     void printSize(){
-        ArrayList<Integer> list = (ArrayList) Arrays.asList(size);
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        for(int i=1;i<size.length;i++) {
+        	list.add(size[i]);
+        }
         Collections.sort(list);
         for(int i:list){
-            if(i==-1)
-            System.out.print(i+" ");
+            if(i!=-1)
+            	System.out.print(i+" ");
         }
         System.out.println();
     }
@@ -52,7 +55,7 @@ public class TestClass {
         int x,y;
         for(int i=0;i<m;i++){
             x= scan.nextInt();
-            y=scan.nextInt();
+            y= scan.nextInt();
             t.union(x,y);
             t.printSize();
         }
