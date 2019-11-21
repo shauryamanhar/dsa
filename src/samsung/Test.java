@@ -41,7 +41,8 @@ public class Test {
     }
     
     static void bfs(int s){
-    	Queue<Integer> q = new LinkedList<Integer>();
+    	java.util.Queue<Integer> q = new LinkedList<Integer>();
+    	
         q.add(s);
         level[s]=0;
         while(!q.isEmpty()){
