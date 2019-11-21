@@ -56,9 +56,7 @@ public class EscapeTheGrid {
 		q.add(new Pair(x,y,0));
 		while(!q.isEmpty()) {
 			Pair pair = q.poll();
-			if(q.size()>row*col) {
-				return -1;
-			}
+			//add visited
 			System.out.println("queue size "+q.size());
 			System.out.println("queued "+pair.x+" "+pair.y);
 			//up

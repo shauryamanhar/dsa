@@ -1,0 +1,104 @@
+#include<iostream>
+using namespace std;
+
+int mat[51][51];
+bool vis[51][51];
+int start[2];
+int end1[2];
+int n,m;
+
+void dfs(int curr[],int end1[],int sum,int &min_a )
+{
+    int x=curr[0];
+    int y=curr[1];
+    vis[x][y]=true;
+    
+    if(x==end1[0]&&y==end1[1])
+    {
+        if(sum<min_a)
+        min_a=sum;
+        vis[x][y]=false;
+        return;
+    }
+    
+    if(y>0)
+    {
+        if(mat[x][y-1]!=0&&!vis[x][y-1])
+        {
+            int alpha[2]={x,y-1};
+            dfs(alpha,end1,sum,min_a);
+        }
+    }
+    
+    if(y<m-1&&!vis[x][y+1])
+    {
+        if(mat[x][y+1]!=0&&!vis[x][y+1])
+        {
+            int alpha[2]={x,y+1};
+            dfs(alpha,end1,sum,min_a);
+        }
+    }
+    
+    for(int i=x-1;i>=0;i--)
+    {
+        if(mat[i][y]!=0&&!vis[i][y])
+        {
+            int alpha[2]={i,y};
+            int beta=x-i;
+            if(beta<sum)
+                beta=sum;
+            dfs(alpha,end1,beta,min_a);    
+        }
+    }
+    
+    for(int i=x+1;i<n;i++)
+    {
+        if(mat[i][y]!=0&&!vis[i][y])
+        {
+            int alpha[2]={i,y};
+            int beta=i-x;
+            if(beta<sum)
+                beta=sum;
+            dfs(alpha,end1,beta,min_a);    
+        }
+    }
+    
+   vis[x][y]=false; 
+}
+
+
+int main()
+{
+    int t;
+    cin>>t;
+    for(int i=1;i<=t;i++)
+    {
+        cin>>n>>m;
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<m;j++)
+        {
+            cin>>mat[i][j];
+            vis[i][j]=false;
+            if(mat[i][j]==2)
+            {
+                start[0]=i;
+                start[1]=j;
+            }
+            
+            if(mat[i][j]==3)
+            {
+                end1[0]=i;
+                end1[1]=j;
+            }
+        }
+    }
+    
+    int min_a=9999;
+    int sum=0;
+    
+    dfs(start,end1,sum,min_a);
+    
+    cout<<"#"<<t<<" "<<min_a<<endl;
+    }
+}
