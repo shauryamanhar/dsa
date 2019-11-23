@@ -20,6 +20,7 @@ public class Bipartite {
 		}
 		q.push(source);
 		colored[source]=1;
+		visited[source]=true;
 		while(!q.isEmpty()) {
 			int temp = q.pop();
 			for(int v=0;v<vertex;v++) {
@@ -31,7 +32,6 @@ public class Bipartite {
 					return false;
 				}
 			}
-			
 		}//while
 		return true;
 	}//bfs

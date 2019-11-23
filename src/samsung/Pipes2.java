@@ -1,7 +1,7 @@
 package samsung;
 
 import java.util.*;
-public class Pipes {
+public class Pipes2 {
 
 	static int arr[][]=null;
 	static boolean visited[][]=null;
@@ -27,7 +27,7 @@ public class Pipes {
 				}
 			}
 			if(arr[X][Y]>0) {
-				flow(X,Y,L);
+				flow(X,Y);
 			}
 			System.out.println("#"+(t+1)+" "+ans);
 			
@@ -36,32 +36,50 @@ public class Pipes {
 	}//main
 	
 
-	static void flow(int x,int y,int l) {
-		if(l==0) {
-			return;
-		}
-		
-		if(visited[x][y]==false) {
-			ans++;
-		}
-		
+	
+	static void flow(int x,int y) {
+		java.util.Queue<Pair> q = new LinkedList<Pair>();
+		q.add(new Pair(x,y,L));
 		visited[x][y]=true;
-		
-		if(inRange(x-1,y) && up(x,y) && down(x-1,y)) {
-			flow(x-1,y,l-1);
+		while(!q.isEmpty()) {
+			Pair p = q.poll();
+			x = p.x;
+			y = p.y;
+			int l = p.l;
+			if(l==0) {
+				continue;
+			}
+			ans++;
+			if(inRange(x-1, y) && !visited[x-1][y] && up(x, y) && down(x-1, y)){
+	            visited[x-1][y] = true;
+	            q.add(new Pair(x-1,y,l-1));
+	        }
+	        if(inRange(x+1, y) && !visited[x+1][y] && down(x, y) && up(x+1, y)){
+	        	visited[x+1][y] = true;
+	            q.add(new Pair(x+1,y,l-1));
+	        }
+	        if(inRange(x, y-1) && !visited[x][y-1] && left(x, y) && right(x, y-1)){
+	        	visited[x][y-1] = true;
+	            q.add(new Pair(x,y-1,l-1));
+	        }
+	        if(inRange(x, y+1) && !visited[x][y+1] && right(x, y) && left(x, y+1)){
+	        	visited[x][y+1] = true;
+	        	q.add(new Pair(x,y+1,l-1));
+	        }
 		}
-		if(inRange(x+1,y) && down(x,y) && down(x+1,y)) {
-			flow(x+1,y,l-1);
-		}
-		if(inRange(x,y-1) && right(x,y) && left(x,y-1)) {
-			flow(x,y-1,l-1);
-		}
-		if(inRange(x,y+1) && left(x,y) && right(x,y+1)) {
-			flow(x,y+1,l-1);
-		}
-		visited[x][y]=false;
 	}//flow
 	
+	
+	
+	
+	static class Pair{
+		int x,y,l;
+		Pair(int x,int y,int l){
+			this.x = x;
+			this.y = y;
+			this.l= l;
+		}//pair
+	}
 	
 	static boolean inRange(int x,int y) {
 		return (x>=0 && x<row && y>=0 && y<col);

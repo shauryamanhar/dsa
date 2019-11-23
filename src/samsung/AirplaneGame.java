@@ -28,9 +28,9 @@ public class AirplaneGame {
 //			}
 			//placing A in last row(n)
 			a[n][2]=2;
-			System.out.println("a[0]"+a[0][0]);
+//			System.out.println("a[0]"+a[0][0]);
 			for(int j=n-1;j>0;j--) {
-				maxCoins=-1;
+				coins=-1;
 				detonate(j);
 				getMaxCoins(2, 0, n);
 				unDetonate(j);
