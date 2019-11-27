@@ -27,7 +27,7 @@ public class AirplaneGame {
 //				a[n][j]=0;
 //			}
 			//placing A in last row(n)
-			a[n][2]=2;
+			a[n][2]=3;
 //			System.out.println("a[0]"+a[0][0]);
 			for(int j=n-1;j>0;j--) {
 				coins=-1;
