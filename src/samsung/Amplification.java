@@ -11,8 +11,8 @@ public class Amplification {
 				{1,0,1},
 				{1,0,0}
 		};
-//		int k=2,col=0;
-//		System.out.println(solve(mat,col,k,n,m));
+		int k=2,col=0;
+		System.out.println(solve(mat,col,k,n,m));
 	}
 	void change(int m[][]) {
 		
