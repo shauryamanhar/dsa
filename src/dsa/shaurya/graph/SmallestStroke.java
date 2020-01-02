@@ -10,13 +10,19 @@ class SmallestStroke {
 	static int ans = Integer.MAX_VALUE;
 	
 	public static void main(String[] args) throws InterruptedException {
+		Scanner scan = new Scanner(System.in);
+		int h = scan.nextInt();
 		ArrayList<String> list = new ArrayList<String>();
-		list.add("avaaba");
-		list.add("avaaba");
-		list.add("bbabbc");
-		list.add("bbabbc");
+		String s = new String();
+		for(int i=0;i<h;i++) {
+			s = scan.nextLine();
+			list.add(s);
+		}
+//		list.add("aaaba");
+//		list.add("ababa");
+//		list.add("aaaca");
 		solve(list);
-		System.out.println("Stroke count "+cn);
+		System.out.println(cn);
 	}
 	
 	
@@ -76,12 +82,6 @@ class SmallestStroke {
 			x = p.x;
 			y = p.y;
 			counter[x][y]=cn;
-//			try {
-//				Thread.sleep(0);
-//				System.out.println("running char "+currChar+"  x "+x+"  y "+y);
-//			} catch (InterruptedException e) {
-//				e.printStackTrace();
-//			}
 			//up
 			if(isSafe(x-1,y) && arr[x-1][y]==currChar) {
 				visited[x-1][y] = true;
