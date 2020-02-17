@@ -11,5 +11,4 @@ public class AccessMyFile {
 			System.out.print((char)bis.read());
 		}
 	}
-
 }
