@@ -2,62 +2,58 @@ package dsa.shaurya.disjoin;
 
 import java.util.*;
 
-public class TestClass {
-    int parent[] = null;
-    int size[] = null;
-    
-    public TestClass(int n){
-        this.parent = new int[n+1];
-        size = new int[n+1];
-        for(int i=0;i<=n;i++){
-            parent[i]=i;
-            size[i]=1;
+public  class TestClass {
+	static int n,m;
+	static int a[];
+	static int s[];
+    public static void main(String args[] ) throws Exception {
+        Scanner scan = new Scanner(System.in);
+        n = scan.nextInt();
+        m = scan.nextInt();
+        a = new int[n+1];
+        s = new int[n+1];
+        for(int i=1;i<=n;i++) {
+        	a[i]=i;
+        	s[i]=1;
         }
-    }
-    
-    int root(int a){
-        while(parent[a]!=a){
-            a = parent[a];
+        
+        int x,y;
+        for(int i=0;i<m;i++) {
+        	x = scan.nextInt();
+        	y = scan.nextInt();
+        	un(x,y);
         }
-        return a;
-    }
-    
-    boolean union(int a,int b){
-        int ra = root(a);
-        int rb = root(b);
-        if(ra==rb){
-            return false;
-        }
-        parent[ra]=rb;
-        size[rb]+=size[ra];
-        size[ra]=-1;
-        return true;
-    }//union
-    
-    void printSize(){
-        ArrayList<Integer> list = new ArrayList<Integer>();
-        for(int i=1;i<size.length;i++) {
-        	list.add(size[i]);
-        }
-        Collections.sort(list);
-        for(int i:list){
-            if(i!=-1)
-            	System.out.print(i+" ");
+        
+        for(int i=1;i<=n;i++) {
+        	System.out.print(s[root(i)]-1+" ");
         }
         System.out.println();
+        
     }
     
-    public static void main(String args[] ) throws Exception {
-        Scanner scan  = new Scanner(System.in);
-        int n= scan.nextInt();
-        TestClass t = new TestClass(n); 
-        int m = scan.nextInt();
-        int x,y;
-        for(int i=0;i<m;i++){
-            x= scan.nextInt();
-            y= scan.nextInt();
-            t.union(x,y);
-            t.printSize();
-        }
-    }//main
+    static int root(int x) {
+    	int p = x;
+    	while(a[p]!=p) {
+    		p = a[p];
+    	}
+    	return p;
+    }
+    
+    static void un(int x,int y) {
+    	int i = root(x);
+    	int j = root(y);
+    	if(i==j) {
+    		return;
+    	}
+    	if (s[i] > s[j]) {
+    		a[j] = i;
+    		s[i] = s[i] + s[j];
+    	} else {
+    		a[i] = j;
+    		s[j] = s[j] + s[i];
+    	}
+    }
+    
+    
+
 }
