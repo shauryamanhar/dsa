@@ -33,7 +33,7 @@ public class TopologicalSortInorder {
 		
 		while(!q.isEmpty()) {
 			int vertex = q.poll();
-			topologicalSort[vertex]=counter++;
+			topologicalSort[counter++]=vertex;
 			for(int i=0;i<n;i++) {
 				if(mat[vertex][i]==1 && !vis[i]) {
 					inorder[i]--;
@@ -48,7 +48,7 @@ public class TopologicalSortInorder {
 			System.out.println("Graph has cycle");
 		}else {
 			for(int i=0;i<n;i++) {
-				System.out.println((i+1)+"  order "+topologicalSort[i]);
+				System.out.println(topologicalSort[i]+1);
 			}
 		}
 	}//topo
