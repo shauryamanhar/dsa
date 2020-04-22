@@ -1,70 +1,72 @@
 package dsa.shaurya.graph;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 
-public class TheFlight {
-	static int n,c,t;
-	static ArrayList<Integer>[] adj ;
+
+public class TheFlight{
+	static int mat[][];
+	static boolean vis[];
+	static int parent[];
 	static ArrayList<Integer> ans;
-	public static void main(String[] args) {
-		Scanner scan = new Scanner(System.in);
-		n = scan.nextInt();
-		adj = new ArrayList[n];
+	public static void main(String[] args) throws FileNotFoundException {
+		Scanner sc = new Scanner(System.in);
+		int n,m,t,c;
+		n = sc.nextInt();
+		m = sc.nextInt();
+		t = sc.nextInt();//All the airports will switch their states from Loading to Running and vice versa after every T minutes. 
+		c = sc.nextInt();//The time taken to travel through any flight route is C minutes.
+		
+		mat = new int[n][n];
+		vis = new boolean[n];
+		parent = new int[n];
+		for(int i=0;i<n;i++) {
+			parent[i]=-1;
+		}
 		ans = new ArrayList<Integer>();
+		int x,y;
 		for(int i=0;i<n;i++) {
-			adj[i] = new ArrayList<Integer>();
+			x = sc.nextInt()-1;
+			y = sc.nextInt()-1;
+			mat[x][y]=1;
+			mat[y][x]=1;
 		}
-		int m = scan.nextInt();
-		t = scan.nextInt();
-		c = scan.nextInt();
 		
-		for(int i=0;i<m;i++) {
-			int x = scan.nextInt();
-			int y = scan.nextInt();
-			adj[x-1].add(y-1);
-			adj[y-1].add(x-1);
-		}//for
-		
-		int src = scan.nextInt();
-		int dst = scan.nextInt();
-		
-		for(int i=0;i<n;i++) {
-			Collections.sort(adj[i]);
+		x = sc.nextInt()-1;
+		y = sc.nextInt()-1;
+		bfs(x,y);
+		ans.add(y);
+		int s = parent[y];
+		int cnt=1;
+		while(s!=x) {
+			ans.add(s);
+			s = parent[s];
+			cnt++;
 		}
-		int parent[] = new int[n];
-		bfs(src-1,dst-1,parent);
-//		for(int i:parent) {
-//			System.out.println(i);
-//		}
-		System.out.println(ans);
-	}//main
+		ans.add(x);
+		System.out.println(ans.size());
+		for(int i=ans.size()-1;i>=0;i--)
+			System.out.print((ans.get(i)+1)+" ");
+		System.out.println();
+	}
 	
 	
-	static void bfs(int src,int dst,int parent[]) {
-		Queue<Integer> q = new LinkedList<Integer>();
-		boolean visited[] = new boolean[n];
-		parent[src]=-1;
+	static void bfs(int src,int dest) {
+		Queue< Integer> q = new LinkedList<Integer>();
 		q.add(src);
-		visited[src] = true;
-		ans.add(src);
+		vis[src]=true;
 		while(!q.isEmpty()) {
-			int vertex = q.poll();
-			System.out.println("vertex "+vertex);
-			for(int v :adj[vertex]) {
-				if(!visited[v]) {
-					visited[v]=true;
-					parent[v]=vertex;
-					if(v==dst) {
-						ans.add(v);
-						System.out.println("v "+v+" vertex "+vertex);
+			src = q.poll();
+			for(int i=0;i<mat.length;i++) {
+				if(mat[src][i]==1 && !vis[i]) {
+					vis[i]=true;
+					parent[i]=src;
+					if(i==dest) {
 						return;
 					}
-					ans.add(v);
-					q.add(v);
+					q.add(i);
 				}
 			}
-		}//while
-		
-		
-	}//bfs
-
+		}
+	}
 }
