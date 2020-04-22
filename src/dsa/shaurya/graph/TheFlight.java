@@ -10,7 +10,7 @@ public class TheFlight{
 	static int parent[];
 	static ArrayList<Integer> ans;
 	public static void main(String[] args) throws FileNotFoundException {
-		Scanner sc = new Scanner(System.in);
+		Scanner sc = new Scanner(new File("D:\\Git\\dsa\\src\\testcase.txt"));
 		int n,m,t,c;
 		n = sc.nextInt();
 		m = sc.nextInt();
@@ -25,7 +25,7 @@ public class TheFlight{
 		}
 		ans = new ArrayList<Integer>();
 		int x,y;
-		for(int i=0;i<n;i++) {
+		for(int i=0;i<m;i++) {
 			x = sc.nextInt()-1;
 			y = sc.nextInt()-1;
 			mat[x][y]=1;
@@ -34,39 +34,48 @@ public class TheFlight{
 		
 		x = sc.nextInt()-1;
 		y = sc.nextInt()-1;
-		bfs(x,y);
-		ans.add(y);
-		int s = parent[y];
-		int cnt=1;
-		while(s!=x) {
-			ans.add(s);
-			s = parent[s];
-			cnt++;
-		}
-		ans.add(x);
-		System.out.println(ans.size());
-		for(int i=ans.size()-1;i>=0;i--)
-			System.out.print((ans.get(i)+1)+" ");
-		System.out.println();
+		bfs(x,y,n);
 	}
 	
 	
-	static void bfs(int src,int dest) {
+	static void bfs(int src,int dest,int n) {
 		Queue< Integer> q = new LinkedList<Integer>();
+		int distance[] = new int[n];
+		int path[] = new int[n];
+		for(int i=0;i<n;i++) {
+			distance[i]=-1;
+			path[i]=-1;
+		}
+		
 		q.add(src);
-		vis[src]=true;
+		distance[src]=0;
+		
 		while(!q.isEmpty()) {
-			src = q.poll();
-			for(int i=0;i<mat.length;i++) {
-				if(mat[src][i]==1 && !vis[i]) {
-					vis[i]=true;
-					parent[i]=src;
+			int vertex = q.poll();
+			for(int i=0;i<n;i++) {
+				if(mat[vertex][i]==1 && distance[i]==-1) {
+					distance[i]=distance[vertex]+1;
+					path[i]=vertex;
 					if(i==dest) {
-						return;
+						break;
 					}
 					q.add(i);
 				}
 			}
 		}
+		
+		ArrayList<Integer> ans = new ArrayList<Integer>();
+		ans.add(dest);
+		int s = dest;
+		while(s!=src){
+			s = path[s];
+			ans.add(s);
+		}
+		System.out.println(ans.size());
+		for(int i=ans.size()-1;i>=0;i--) {
+			System.out.print(ans.get(i)+1+" ");
+		}
+		System.out.println();
+		
 	}
 }
