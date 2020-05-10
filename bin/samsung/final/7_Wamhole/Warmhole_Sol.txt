@@ -1,0 +1,78 @@
+#include<iostream>
+using namespace std;
+
+struct Hole{
+  int x,y,a,b,w;  
+};
+int mat[100][100];
+
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int sx,sy,dx,dy,n;
+        cin>>sx>>sy>>dx>>dy>>n;
+        
+        for(int i=0;i<100;i++)
+        {
+            for(int j=0;j<100;j++)
+            {
+                mat[i][j]=abs(sx-i)+abs(sy-j);
+            }
+        }
+        mat[sx][sy]=0;
+        
+        Hole hole[2*n];
+        int x,y,a,b,w;
+       
+        for(int i=0;i<2*n;i+=2)
+        {
+            
+            cin>>x>>y>>a>>b>>w;
+            
+            hole[i].x=x;
+            hole[i].y=y;
+            hole[i].a=a;
+            hole[i].b=b;
+            hole[i].w=w;
+            
+            hole[i+1].a=x;
+            hole[i+1].b=y;
+            hole[i+1].x=a;
+            hole[i+1].y=b;
+            hole[i+1].w=w;
+        }
+        
+        bool check=true;
+        while(check)
+        {
+           check=false;
+           for(int i=0;i<2*n;i++)
+           {
+               for(int j=0;j<2*n;j++)
+               {
+                   if(i==j)
+                   continue;
+                   
+                   if(mat[hole[j].x][hole[j].y]+hole[j].w+abs(hole[i].x-hole[j].a)+abs(hole[i].y-hole[j].b)<mat[hole[i].x][hole[i].y])
+                   {
+                       mat[hole[i].x][hole[i].y]=mat[hole[j].x][hole[j].y]+hole[j].w+abs(hole[i].x-hole[j].a)+abs(hole[i].y-hole[j].b);
+                       check=true;
+                   }
+               }
+           }
+        }
+        
+        int ans=abs(sx-dx)+abs(sy-dy);
+        
+        for(int i=0;i<2*n;i++)
+        {
+            if(mat[hole[i].x][hole[i].y]+abs(hole[i].x-dx)+abs(hole[i].y-dy)<ans)
+            ans=mat[hole[i].x][hole[i].y]+abs(hole[i].x-dx)+abs(hole[i].y-dy);
+        }
+        cout<<ans<<endl;
+    }
+    
+}

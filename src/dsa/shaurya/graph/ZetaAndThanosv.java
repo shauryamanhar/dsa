@@ -43,8 +43,7 @@ public class ZetaAndThanosv {
 		Queue<P> q = new LinkedList<P>();
 		boolean vis[][] = new boolean[n][m];
 		int d[][] = {{-1,0},{1,0},{0,1},{0,-1}};
-		if(true)
-			break;
+		
 		q.add(new P(sx,sy));
 		vis[sx][sy]=true;
 		int cost=0;
