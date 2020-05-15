@@ -2,7 +2,7 @@ package dsa.shaurya.tree;
 
 import java.util.LinkedList;
 import java.util.Queue;
-
+//inorder to build tree
 public class InorderToTree {
 	static class Node{
 		int data;
