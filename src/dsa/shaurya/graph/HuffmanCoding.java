@@ -2,6 +2,7 @@ package dsa.shaurya.graph;
 
 import java.util.Collections;
 import java.util.PriorityQueue;
+
 //huffman coding is used to data compression 
 //assing more bit for less frquent and less bits for character with high frequency
 //this is greedy method
@@ -19,6 +20,7 @@ public class HuffmanCoding {
     static void huffmanCoding(int fq[], char c[],int n) {
         //Min Priority Queue
         PriorityQueue<HuffmanNode> pq = new PriorityQueue<>(n, Collections.reverseOrder());
+
         //create Priority Queue with frquency and character
         int r=0;
         for (int a : fq) {
@@ -26,6 +28,7 @@ public class HuffmanCoding {
         }
         //create node for tree
         HuffmanNode temp;
+
         //end this loop when only one node left in priority queue and it going to root node
         //for loop for all character
         for (int i = 0; i < n && pq.size()>1; i++) {
@@ -33,16 +36,19 @@ public class HuffmanCoding {
             //get the two minimun node from Priority Queue
             temp.left = pq.poll();
             temp.right = pq.poll();
+
             System.out.println("left " + temp.left.data + " right " + temp.right.data);
+
             //add two min node to create one parent node
             temp.data = temp.left.data + temp.right.data;
             //add parent node to Priority Queue
             pq.add(temp);
         }
+
         System.out.println("completed building");
         System.out.println("Printing Binary");
-        //printing all the binary code using preorder traversal 
-        //
+
+        //printing all the binary code using preorder traversal
         printBinary(pq.peek(), "");
 
     }
