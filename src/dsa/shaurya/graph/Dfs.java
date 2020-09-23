@@ -1,9 +1,7 @@
 package dsa.shaurya.graph;
 
-import java.util.Scanner;
+//import java.util.Scanner;
 import java.util.Stack;
-
-import javafx.scene.transform.Scale;
 
 public class Dfs {
 
