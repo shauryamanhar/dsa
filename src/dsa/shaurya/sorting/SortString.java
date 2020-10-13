@@ -24,7 +24,7 @@ public class SortString {
 					unique=a[r];
 				}
 			}
-			
+			sc.close();
 		}
 	}
 	
