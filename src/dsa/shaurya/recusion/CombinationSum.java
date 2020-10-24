@@ -17,7 +17,11 @@ public class CombinationSum {
             return;
         }
         if(target==0){
-            ans.add((ArrayList<Integer>)list.clone());
+            ArrayList<Integer> temp = new ArrayList<>();
+            for(int r:list){
+                temp.add(r);
+            }
+            ans.add(temp);
             System.out.println("list added to ans "+ans.toString());
             return;
         }
