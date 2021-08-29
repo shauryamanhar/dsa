@@ -28,3 +28,5 @@ hs_err_pid*
 #project file
 .project
 /bin/
+/dsa/
+/testcase.txt

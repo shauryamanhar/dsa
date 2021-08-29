@@ -64,15 +64,15 @@ public class Operations {
 		return q;
 	}
 	
-	public static Node reverse(Node head) {
-		Node temp =null,newNode;
-		while(head!=null) {
-			newNode = head.next;
-			head.next=temp;
-			temp = head;
-			head = newNode;
+	public static Node reverse(Node curr) {
+		Node prev =null,temp;
+		while(curr!=null) {
+			temp = curr.next;
+			curr.next=prev;
+			prev = curr;
+			curr = temp;
 		}
-		return temp;
+		return prev;
 	}
 	public static Node removeFromEnd(Node head) {
 		Node p = head,q = null;

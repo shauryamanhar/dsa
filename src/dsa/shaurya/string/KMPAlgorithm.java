@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class KMPAlgorithm {
 
 	public static void main(String[] args) {
-		String a = "ABABCABAACBAB";
+		String a = "ABXAB";
 		//TODO implement KMP
 		computeLPSArray(a, a.length(), new int[a.length()]);
 	}
@@ -41,7 +41,7 @@ public class KMPAlgorithm {
 		}//while
 		int r=0;
 		for(char c:pat.toCharArray()) {
-			System.out.print(lps[r++]+",   ");
+			System.out.print(lps[r++]+",");
 		}
 	}
 
