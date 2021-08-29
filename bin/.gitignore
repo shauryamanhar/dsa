@@ -28,5 +28,6 @@ hs_err_pid*
 #project file
 .project
 /bin/
+/.gitignore
 /dsa/
 /testcase.txt
